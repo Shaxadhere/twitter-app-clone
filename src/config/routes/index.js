@@ -42,7 +42,7 @@ export const routes = {
 const AppRoutes = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={routes.TWEET_DETAILS.name}>
+            <Stack.Navigator initialRouteName={routes.HOME.name}>
                 {Object.keys(routes).map((item, index) => {
                     return (
                         <Stack.Screen
