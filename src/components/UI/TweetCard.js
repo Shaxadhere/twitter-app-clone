@@ -1,33 +1,36 @@
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Touchable, Pressable } from 'react-native'
 import React from 'react'
+import moment from 'moment/moment'
+import colors from '../../config/constants/colors'
 
 const { width } = Dimensions.get("window")
 
-const TweetCard = () => {
+const TweetCard = ({ tweet }) => {
+    const { image, name, username, date, content } = tweet
     return (
         <View style={styles.container}>
             <View style={styles.card}>
-                <Image
-                    source={{
-                        uri: "https://pbs.twimg.com/profile_images/1546415342901239810/U8EaywSS_400x400.jpg"
-                    }}
-                    style={styles.avatar}
-                />
+                <Pressable onPress={() => alert("ok")}>
+                    <Image
+                        source={{
+                            uri: image
+                        }}
+                        style={styles.avatar}
+                    />
+                </Pressable>
                 <View style={styles.cardBody}>
-                    <View style={styles.nameContainer}>
-                        <Text style={styles.nameText}>Thememestry</Text>
-                        <Text style={styles.textSecondary}>@Thememestry</Text>
-                        <Text style={styles.textSecondary}>1h</Text>
-                    </View>
-                    <View style={styles.tweetContainer}>
-                        <Text style={styles.tweet}>
-                            Yeah man, Riswan is religious, And his faith drives a lot of his work ethic.
-                        </Text>
-                        <Text style={styles.tweet}>
-                            He has offered everyone else in the cricket fraternity nothing but respect and reverence. And if you ever hear him talk about his faith,
-                            so much of it is driven by believing in God.
-                        </Text>
-                    </View>
+                    <Pressable>
+                        <View style={styles.nameContainer}>
+                            <Text style={styles.nameText}>{name}</Text>
+                            <Text style={styles.textSecondary}>@{username}</Text>
+                            <Text style={styles.textSecondary}>{moment(date).fromNow(true) + " ago"}</Text>
+                        </View>
+                        <View style={styles.tweetContainer}>
+                            <Text style={styles.tweet}>
+                                {content}
+                            </Text>
+                        </View>
+                    </Pressable>
                 </View>
             </View>
         </View>
@@ -69,7 +72,8 @@ const styles = StyleSheet.create({
     },
     tweet: {
         color: colors.white,
-        maxWidth: width - spacing * 6
+        maxWidth: width - spacing * 6.5,
+        lineHeight: 22
     },
     tweetContainer: {
         marginVertical: spacing * 0.2
